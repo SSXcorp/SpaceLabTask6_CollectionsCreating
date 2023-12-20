@@ -1,6 +1,7 @@
 package Collections2.Task;
 
 public interface MyList {
+
     int size();
 
     boolean isEmpty();
@@ -21,5 +22,5 @@ public interface MyList {
 
     int lastIndexOf(Integer object);
 
-    Integer[] toArray();
+//    Integer[] toArray();
 }

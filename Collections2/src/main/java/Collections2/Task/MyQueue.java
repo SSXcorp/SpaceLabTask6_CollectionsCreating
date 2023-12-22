@@ -9,5 +9,4 @@ public interface MyQueue {
 
     int size();
 
-    boolean isEmpty();
 }

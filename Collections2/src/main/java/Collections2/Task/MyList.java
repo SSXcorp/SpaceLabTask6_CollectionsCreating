@@ -22,5 +22,4 @@ public interface MyList {
 
     int lastIndexOf(Integer object);
 
-//    Integer[] toArray();
 }

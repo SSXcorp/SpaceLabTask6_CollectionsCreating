@@ -1,6 +1,6 @@
 package Collections2.Task;
 
-public interface MyMap {
+public interface MyMap<K, V> {
     int size();
 
     boolean isEmpty();

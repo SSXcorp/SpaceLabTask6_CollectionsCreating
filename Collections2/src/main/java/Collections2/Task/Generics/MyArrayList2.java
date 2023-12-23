@@ -1,31 +1,28 @@
-package Collections2.Task;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
+package Collections2.Task.Generics;
 
 import java.util.Arrays;
 import java.util.Objects;
 
-public class MyArrayList implements MyList {
+public class MyArrayList2<T> implements MyList<T> {
     private static final int INITIAL_CAPACITY = 10;
-    public Integer[] array;
+    private T[] array;
     private int size;
 
-    public MyArrayList() {
-        array = new Integer[INITIAL_CAPACITY];
+    @SuppressWarnings("unchecked") // no notifications about typeCasting, problems that can occur with old legacy code
+    public MyArrayList2() {
+        array = (T[]) new Object[INITIAL_CAPACITY];
         size = 0;
     }
 
     private void ensureCapacity() {
         if (size == array.length) {
-            array = Arrays.copyOf(array, array.length * 2); //Making copy of current array + increasing the size x2
+            array = Arrays.copyOf(array, array.length * 2);
         }
     }
 
     @Override
     public int size() {
-        return array.length;
+        return size;
     }
 
     @Override
@@ -34,7 +31,7 @@ public class MyArrayList implements MyList {
     }
 
     @Override
-    public boolean contains(Integer object) {
+    public boolean contains(T object) {
         for (int i = 0; i < size; i++) {
             if (Objects.equals(object, array[i])) {
                 return true;
@@ -44,19 +41,18 @@ public class MyArrayList implements MyList {
     }
 
     @Override
-    public void add(Integer object) {
+    public void add(T object) {
         ensureCapacity();
         array[size++] = object;
     }
 
     @Override
-    public void add(int index, Integer object) {
+    public void add(int index, T object) {
         if (index < 0 || index > size) {
             add(object);
-        }
-        else {
+        } else {
             ensureCapacity();
-            for (int i = size; i > index; i--) { // Move elements right from the end of array
+            for (int i = size; i > index; i--) {
                 array[i] = array[i - 1];
             }
 
@@ -66,13 +62,13 @@ public class MyArrayList implements MyList {
     }
 
     @Override
-    public boolean remove(Integer object) {
+    public boolean remove(T object) {
         for (int i = 0; i < size; i++) {
             if (Objects.equals(object, array[i])) {
-                for (int j = i; j < size - 1; j++) { //moving elements to the right side from current index
+                for (int j = i; j < size - 1; j++) {
                     array[j] = array[j + 1];
                 }
-                array[--size] = null; // decreasing size + make last element null
+                array[--size] = null;
                 return true;
             }
         }
@@ -80,21 +76,21 @@ public class MyArrayList implements MyList {
     }
 
     @Override
-    public void clear() { //Filling array with null values
+    public void clear() {
         Arrays.fill(array, null);
         size = 0;
     }
 
     @Override
-    public Integer get(int index) {
-        if (index < 0 || index >= size) { // can be changed to return 0 as default value
+    public T get(int index) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index out of bounds: " + index);
         }
         return array[index];
     }
 
     @Override
-    public int indexOf(Integer object) {
+    public int indexOf(T object) {
         for (int i = 0; i < size; i++) {
             if (Objects.equals(object, array[i])) {
                 return i;
@@ -104,7 +100,7 @@ public class MyArrayList implements MyList {
     }
 
     @Override
-    public int lastIndexOf(Integer object) {
+    public int lastIndexOf(T object) {
         for (int i = size - 1; i >= 0; i--) {
             if (Objects.equals(object, array[i])) {
                 return i;
@@ -116,21 +112,17 @@ public class MyArrayList implements MyList {
     public int length() {
         return size;
     }
+
     public String getAllElements() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < size; i++) {
-            result += array[i] + ", ";
+            result.append(array[i]).append(", ");
         }
-        if (result.contains(",")){
+        if (result.length() > 0) {
             return "[ " + result.substring(0, result.length() - 2) + " ]";
         }
         return "[]";
     }
 
-//    @Override
-//    public Integer[] toArray() {
-//        return Arrays.copyOf(array, size);
-//    }
-
-
 }
+

@@ -1,6 +1,8 @@
 package Collections2.Task;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class MyHashMap implements MyMap<String, Integer> {
@@ -102,19 +104,35 @@ public class MyHashMap implements MyMap<String, Integer> {
     }
 
     @Override
-    public String[] keyArray() { //returns key array
-        return Arrays.stream(table)
-                .filter(Objects::nonNull)
-                .map(entry -> entry.key)
-                .toArray(String[]::new);
+    public String[] keyArray() {
+        List<String> keys = new ArrayList<>();
+
+        for (Entry entry : table) {
+            while (entry != null) {
+                if (entry.key != null) {
+                    keys.add(entry.key);
+                }
+                entry = entry.next;
+            }
+        }
+
+        return keys.toArray(new String[0]);
     }
 
     @Override
-    public Integer[] valueArray() { //returns values array
-        return Arrays.stream(table)
-                .filter(Objects::nonNull)
-                .map(entry -> entry.value)
-                .toArray(Integer[]::new);
+    public Integer[] valueArray() {
+        List<Integer> values = new ArrayList<>();
+
+        for (Entry entry : table) {
+            while (entry != null) {
+                if (entry.key != null) {
+                    values.add(entry.value);
+                }
+                entry = entry.next;
+            }
+        }
+
+        return values.toArray(new Integer[0]);
     }
 
     private void ensureCapacity() { //Method to calc capacity
@@ -146,6 +164,21 @@ public class MyHashMap implements MyMap<String, Integer> {
 
     private int getIndex(String key, int capacity) { // Calculates new index in accordance with a capacity if key != null
         return key == null ? 0 : Math.abs(key.hashCode() % capacity);
+    }
+
+    public List<String> getAllValuesKeys() {
+        List<String> keysWithValues = new ArrayList<>();
+
+        for (Entry entry : table) {
+            while (entry != null) {
+                if (entry.key != null) {
+                    keysWithValues.add(entry.key + ": " + entry.value);
+                }
+                entry = entry.next;
+            }
+        }
+
+        return keysWithValues;
     }
 }
 

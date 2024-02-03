@@ -95,11 +95,11 @@ public class Main {
 
         System.out.println("==============================================================");
 
-        System.out.println("Peek : " + linked.offer(2));
+        System.out.println("Offer : " + linked.offer(2));
 
         System.out.println("==============================================================");
 
-        System.out.println("Peek : " + linked.remove(2));
+        System.out.println("Remove : " + linked.remove(2));
 
         System.out.println("==============================================================");
         System.out.println("==============================================================");
@@ -144,11 +144,11 @@ public class Main {
 
         System.out.println("==============================================================");
 
-        System.out.println("HashMap size: " + hashMap.get("Hello"));
+        System.out.println("HashMap get: " + hashMap.get("Hello"));
 
         System.out.println("==============================================================");
 
-        System.out.println("HashMap size: " + hashMap.remove("Hello"));
+        System.out.println("HashMap remove: " + hashMap.remove("Hello"));
         System.out.println(hashMap.getAllValuesKeys());
 
         System.out.println("==============================================================");
